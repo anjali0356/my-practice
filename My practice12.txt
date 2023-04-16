@@ -1,0 +1,473 @@
+class Solution {
+    public int tribonacci(int n) {
+        if(n<=1)
+            return n;
+        int[] map=new int[n+2];
+        map[2]=1;
+        for(int i=3;i<=n+1;i++)
+            map[i]=map[i-1]+map[i-2]+map[i-3];
+        return map[n+1];
+    }
+}print number in decreasing order
+class Recursion {
+    public static void printNumb(int n){
+        if(n==0){
+            return;
+        }
+        System.out.println(n);
+        printNumb(n-1);
+    }
+    public static void main(String[] args) {
+       int n=6;
+       printNumb(n);
+ }
+} tribbonici
+//print value in increasing order
+class Recursion {
+    public static void printNumb(int n){
+        if(n==5){
+            return;
+        }
+        System.out.println(n);
+        printNumb(n+1);
+    }
+    public static void main(String[] args) {
+       int n=1;
+       printNumb(n);
+ }
+}
+print sum of number
+class Recursion {
+    public static void printSum(int n,int j,int sum){
+        if(i == n){
+            sum+= i;
+            System.out.println(sum);
+            return;
+        }
+        sum+=i;
+        printSum(i+1,n,sum);
+    }
+    public static void main(String[] args) {
+       printSum(1,5,0);
+  }
+}
+class Recursion {
+    public static void factorial(int n){
+        if(n == 0 || n==1){
+            return 1;
+        }
+        else{
+            return n*factorial(n*n-1);
+        }
+    public static void main(String[] args) {
+        int n=5;
+      System.out.println("factorial of a number"+factorial);
+  }
+}
+x^n
+class Recursion {
+    public static int calcPower(int x, int n){
+        if(n == 0){
+            return 1;
+        }
+        if(x == 0){
+            return 0;
+        }
+        int xPownm1=calcPower(x,n-1);
+        int xPown=x*xPownm1;
+        return xPown;
+    }
+    public static void main(String[] args) {
+        int x=2,n=4;
+        int ans=calcPower(x,n);
+        System.out.println(ans);
+    }
+}
+X^x (logn time)
+class Recursion {
+    public static int calcPower(int x, int n){
+        if(n == 0){
+            return 1;
+        }
+        if(x == 0){
+            return 0;
+        }
+        if(n%2==0){
+            return calcPower(x,n/2)*calcPower(x,n/2);
+        }else{
+            return calcPower(x,n/2)*calcPower(x,n/2)*x;
+        }
+    }
+    public static void main(String[] args) {
+        int x=2,n=5;
+        int ans=calcPower(x,n);
+        System.out.println(ans);
+    }
+}
+reverse string
+class Recursion {
+    public static int printRev(String str, int idx){
+        if(idx == 0){
+             System.out.println(str.charAt(idx));
+            return 0;
+        }
+        System.out.println(str.charAt(idx));
+       printRev(str,idx-1);
+    }
+    public static void main(String[] args) {
+        String str="abcd";
+        printRev(str,str.length()-1);
+    }
+}
+is sorted array
+class Recursion {
+    public static boolean isSorted(int arr[],int idx){
+        if(idx == arr.length-1){
+            return true;
+        }
+        if(arr[idx]<arr[idx+1]){
+             isSorted(arr,idx+1);
+        }else{
+            return false;
+          }
+    public static void main(String[] args) {
+        int arr[]={1,3,5};
+        System.out.println(isSorted(arr,0));
+    }
+}
+longest increasing subsequence
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if(nums.length==0)
+            return 0;
+            int dp[] =new int[nums.length];
+            dp[0]=1;
+            int ans=1;
+            for(int i=0;i<dp.length;i++){
+                int max=0;
+                for(int j=0;j<i;j++){
+                    if(nums[i]>nums[j])
+                        max=Math.max(max,dp[j]);
+                }
+                dp[i]=max+1;
+                ans=Math.max(ans,dp[i]);
+            }
+            return ans;
+        }
+    }
+376-wiggle subsequence
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if(nums.length == 1) return 1; 
+        int prevSign = nums[1] - nums[0]; 
+        int length = prevSign != 0 ? 2:1; 
+        for(int i=2;i<nums.length;i++){  
+            int currSign = nums[i] - nums[i-1]; 
+            if((currSign > 0 && prevSign <= 0) || (currSign < 0 && prevSign >= 0)){ 
+                length++; 
+                prevSign = currSign; 
+            }else{
+               
+            }
+        }
+        return length;
+    }
+}
+is subsequence
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.length() == 0){
+            return true;
+        }
+        int is=0,it=0;
+        while(it < t.length()){
+            if(t.charAt(it) == s.charAt(is)){
+                is++;
+                if(is == s.length()){
+                    return true;
+                }
+            }
+            it++;
+        }
+        return false;
+    }
+}
+edit distance
+class Solution {
+    public int minDistance(String word1, String word2) {
+                if(word1 == null && word2 == null) return 0;
+        if(word1 == null || word2 == null) return word1 == null ? word2.length() : word1.length();
+        if(word1.length() == 0 || word2.length() == 0) return word1.length() == 0 ? word2.length() : word1.length();
+
+        int m = word1.length()+1;
+        int n = word2.length()+1;
+        int[][] dp = new int[m][n];
+        for(int i=0; i<m;i++) dp[i][0] = i;
+        for(int i=0;i<n; i++) dp[0][i] = i;
+        for(int i=1; i<m; i++){
+            for(int j = 1; j<n;j++){
+                if(word1.charAt(i-1) == word2.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1];
+                }else{
+                    dp[i][j] = Math.min(dp[i-1][j], Math.min(dp[i-1][j-1], dp[i][j-1])) + 1;
+                }
+            }
+        }
+
+        return dp[m-1][n-1];
+
+
+    }
+}
+class Solution {
+    public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for(int i = 1; i <= n; ++i) {
+            int min = Integer.MAX_VALUE;
+            for(int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j] + 1);
+            }
+            dp[i] = min;
+        }		
+        return dp[n];
+    }
+}
+integer break
+public class Solution{
+public int integerBreak(int n) {
+       int[] dp = new int[n + 1];
+       dp[1] = 1;
+       for(int i = 2; i <= n; i ++) {
+           for(int j = 1; j < i; j ++) {
+               dp[i] = Math.max(dp[i], (Math.max(j,dp[j])) * (Math.max(i - j, dp[i - j])));
+           }
+       }
+       return dp[n];
+    }
+}
+binary search
+class Solution {
+    public int search(int[] nums, int target) {
+        int left=0;
+        int right= nums.length-1;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(nums[mid]==target){
+                return mid;
+        }
+       if(target< nums[mid]){
+           right=mid-1;
+       }
+        else{
+            left=mid+1;
+        }
+    }
+     return-1;
+}
+}
+374 guess number
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+         int low = 1;
+        int high = n;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int res = guess(mid);
+            if (res == 0)
+                return mid;
+            else if (res < 0)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return -1;
+    }
+}
+running sum of 1D array
+class Solution {
+    public int[] runningSum(int[] nums) {
+     int [] ans = new int[nums.length];    
+      int sum = 0;
+      for(int i = 0; i<nums.length;i++){
+          sum+=nums[i];
+          ans[i] = sum;
+      }
+     return ans;   
+    }
+}
+
+number of  island 
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+        int m = grid.length, n = grid[0].length;
+        int count = 0;
+        for (int i = 0; i < m ; i ++) {
+            for (int j = 0; j < n; j ++) {
+                if (grid[i][j] == '1') {
+                    count ++;
+                    dfs(grid, m, n, i, j);
+                }
+            }
+        }
+        return count;
+    }
+    private void dfs(char[][] grid, int m, int n, int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') {
+            return;
+        }
+        grid[i][j] = 'X';
+        dfs(grid, m, n, i - 1, j);
+        dfs(grid, m, n, i + 1, j);
+        dfs(grid, m, n, i, j - 1);
+        dfs(grid, m, n, i, j + 1);
+    }
+}
+monkey move
+class Solution {
+    public int monkeyMove(int n) {
+        long res=1,base=2,mod=(long)1e9+7;
+        while(n>0){
+            if(n%2==1)
+                res=res*base%mod;
+                base=base*base%mod;
+             n>>=1;
+            }
+            return (int)((res-2+mod)%mod);
+        }
+    }
+
+valid perfect aquare
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        double n = Math.sqrt(num);
+        if(n/(int)n==1)
+            return true;
+        return false;
+    }
+}
+gifts
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+        int n = gifts.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->(b-a));    // MAX-HEAP      
+        for(int i = 0; i<n; i++){
+            pq.add(gifts[i]);
+        }     
+        long sum = 0;
+        while(k-->0){
+            pq.add((int)Math.sqrt(pq.remove()));
+        }     
+        while(pq.size()>0){
+            sum+=pq.remove();
+        }
+
+        return sum;
+    }
+}
+game 2
+class Solution {
+    public int jump(int[] nums) {
+        int jumps = 0, farthest = 0;
+        int left = 0, right = 0;
+        while (right < nums.length - 1) {
+            for (int i = left; i <= right; ++i)
+                farthest = Math.max(farthest, i + nums[i]);
+            left = right + 1;
+            right = farthest;
+            ++jumps;
+        }
+        return jumps;
+    }
+}
+linklist random node 
+class Solution {
+    ArrayList<Integer> list = new ArrayList<>();
+    public Solution(ListNode head) {
+        while(head!=null){
+            list.add(head.val);
+            head=head.next;
+        }
+    }
+    
+    public int getRandom() {
+        double rand=Math.random()*list.size();
+        return list.get((int)rand);
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner sc=new Scanner(System.in);
+	   int base=sc.nextInt();
+	   int height=sc.nextInt();
+ float area =1/(2*b*h);
+	  // byte a=10;
+	  // short b=15;
+	  // int c=a+b;
+	 //  float a=12.5;
+	// float  a =12.5;
+	  // double b=123l;
+	  // double c=a*b;t 
+	//  char a=40;
+	//  int  b=30;
+	 // int c=a-b;
+	   //float a=14.3,b=3.2f;
+	 // int c=(float)a/b;
+	 // float r=a%b;
+//	 float b=2,h=3;
+		//System.out.println(c);
+	//	System.out.println(c);//25
+		//System.out.println(c);//10
+	//	System.out.println(10/2*5);//25
+		//System.out.println(10+20/2);//20
+		//System.out.println(1/(2*b*h));0.08333336
+		System.out.println("area of circle"+area);
+	}
+}
+n-ary
+class Solution {
+  public int maxDepth(Node root) {
+    if (root == null)
+      return 0;
+
+    int ans = 0;
+
+    for (Node child : root.children)
+      ans = Math.max(ans, maxDepth(child));
+
+    return 1 + ans;
+  }
+}
+random node in a linked list
+class Solution {
+    ArrayList<Integer>list = new ArrayList<>();
+    public Solution(ListNode head) {
+        while(head!=null){
+            list.add(head.val);
+            head=head.next;
+        }
+    }
+     public int getRandom() {
+        double rand=Math.random()*list.size();
+        return list.get((int)rand);
+    }
+}
+min cost climbing stairs
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int back = cost[0];
+        int front = cost[1];
+        for(int i = 2; i < cost.length; ++i){
+            int temp = Math.min(front, back) + cost[i];
+            back = front;
+            front = temp;
+        }
+        return Math.min(front, back);
+    }
+
+}
